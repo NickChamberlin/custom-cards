@@ -1,3 +1,4 @@
+```yaml
 - type: custom:horizontal-scroll
   item_height: 200px
   item_width: 150px
@@ -14,3 +15,4 @@
     - type: picture-entity
       entity: light.kitchen
       image: /local/kitchen.png
+```
