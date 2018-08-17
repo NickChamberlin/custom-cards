@@ -1,4 +1,4 @@
-class ColumnCard extends HTMLElement {
+class HorizontalScroll extends HTMLElement {
   constructor() {
     super();
     // Make use of shadowRoot to avoid conflicts when reusing
@@ -13,8 +13,8 @@ class ColumnCard extends HTMLElement {
         max-width: 4000px;
         overflow-y: hidden;
         overflow-x: scroll;
-        height: ${cardConfig.item_height};
-        max-height: ${cardConfig.item_height};
+        height: ${this.config.item_height};
+        max-height: ${this.config.item_height};
 
       }
 
@@ -27,8 +27,8 @@ class ColumnCard extends HTMLElement {
 
       .column > * {
         flex: 0 0 auto;
-        width: ${cardConfig.item_width};
-        height: ${cardConfig.item_height};
+        width: ${this.config.item_width};
+        height: ${this.config.item_height};
         margin: 10px;
         opacity: 0;
         animation: easeDown 1000ms cubic-bezier(.1, .80, .44, .96) 0ms forwards;
@@ -65,9 +65,12 @@ class ColumnCard extends HTMLElement {
     if (!config || !config.cards || !Array.isArray(config.cards)) {
       throw new Error('Card config incorrect');
     }
-    const cardConfig = Object.assign({}, config);
-    if (!cardConfig.item_height) cardConfig.item_height = '250px';
-
+    if (!config.item_height) {
+      config.item_height = "40px";
+    }
+    if (!config.item_width) {
+      config.item_height = "40px";
+    }
 
     // The cards are created here in order to allow finding their height later
     // hui-view.js recreated the cards whenever the number of columns change, but that didn't work for me.
@@ -165,4 +168,4 @@ class ColumnCard extends HTMLElement {
     return Math.max(this.columnEntityCount);
   }
 }
-customElements.define('horizontal-scroll', ColumnCard);
+customElements.define('horizontal-scroll', HorizontalScroll);
